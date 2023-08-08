@@ -1,0 +1,14 @@
+<div class="card mb-3" *ngFor="let movie of movieList">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ movie.imageUrl }}" class="img-fluid rounded-start" alt="">
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <h2 class="card-title">{{ movie.title }}</h2>
+                <p class="card-text">{{ movie.description }}</p>
+                <button class="btn btn-sm btn-outline-primary">Details</button>
+            </div>
+        </div>
+    </div>
+</div>
