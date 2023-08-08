@@ -3,11 +3,11 @@ import { Category } from 'src/models/category.model';
 import { CategoryRepository } from 'src/repositories/category.repository';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
-export class CategoryComponent {
+export class CategoriesComponent {
   private repository: CategoryRepository;
   categoryList: Category[];
 
