@@ -1,14 +1,77 @@
-<div class="card mb-3" *ngFor="let movie of movieList">
-    <div class="row">
-        <div class="col-md-3">
-            <img src="{{ movie.imageUrl }}" class="img-fluid rounded-start" alt="">
-        </div>
-        <div class="col-md-9">
-            <div class="card-body">
-                <h2 class="card-title">{{ movie.title }}</h2>
-                <p class="card-text">{{ movie.description }}</p>
-                <button class="btn btn-sm btn-outline-primary">Details</button>
+<div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="filterText" (ngModelChange)="onFilterChange()"
+        placeholder="Film ara...">
+</div>
+
+<h2>filterText</h2>
+<div *ngIf="movieList.length > 0; else no_movie">
+    <div class="card mb-3" *ngFor="let movie of movieList | movieFilter: filterText">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ movie.imageUrl }}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h2 class="card-title">{{ movie.title | titlecase }}</h2>
+                    <p class="card-text">{{ movie.description | summary: 30 }}</p>
+                    <p class="card-text">{{ movie.publishDate | date: "dd/MM/y" }}</p>
+                    <button class="btn btn-sm btn-outline-primary">Detay</button>
+                    <button (click)="addToList($event, movie)" class="btn btn-sm btn-primary ms-1">Listeye Ekle</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #no_movie>
+    <div class="alert alert-warning">Henüz bir film yok.</div>
+</ng-template>
+
+<h2>onFilterChange()</h2>
+<div *ngIf="filteredMovieList.length > 0; else no_filtered_movie">
+    <div class="card mb-3" *ngFor="let movie of filteredMovieList">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ movie.imageUrl }}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h2 class="card-title">{{ movie.title | titlecase }}</h2>
+                    <p class="card-text">{{ movie.description | summary: 30 }}</p>
+                    <p class="card-text">{{ movie.publishDate | date: "dd/MM/y" }}</p>
+                    <button class="btn btn-sm btn-outline-primary">Detay</button>
+                    <button (click)="addToList($event, movie)" class="btn btn-sm btn-primary ms-1">Listeye Ekle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #no_filtered_movie>
+    <div class="alert alert-warning">Aranan isimde bir film yok.</div>
+</ng-template>
+
+<div *ngIf="popularMovieList.length > 0; else no_popular_movie">
+    <br><br>
+    <h2>Popüler Filmler</h2>
+    <div class="card mb-3" *ngFor="let movie of popularMovieList">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ movie.imageUrl }}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h2 class="card-title">{{ movie.title | titlecase }}</h2>
+                    <p class="card-text">{{ movie.description | summary: 30 }}</p>
+                    <p class="card-text">{{ movie.publishDate | date: "dd/MM/y" }}</p>
+                    <button class="btn btn-sm btn-outline-primary">Detay</button>
+                    <button (click)="addToList($event, movie)" class="btn btn-sm btn-primary ms-1">Listeye Ekle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #no_popular_movie>
+    <div class="alert alert-warning">Henüz popüler bir film yok.</div>
+</ng-template>

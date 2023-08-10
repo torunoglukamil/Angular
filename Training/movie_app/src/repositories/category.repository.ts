@@ -7,19 +7,19 @@ export class CategoryRepository {
     this.categoryList = [
       {
         id: 1,
-        name: "Macera",
+        name: "macera",
       },
       {
         id: 2,
-        name: "Romantik",
+        name: "romantik",
       },
       {
         id: 3,
-        name: "Bilim Kurgu",
+        name: "bilim Kurgu",
       },
       {
         id: 4,
-        name: "Komedi",
+        name: "komedi",
       }
     ];
   }

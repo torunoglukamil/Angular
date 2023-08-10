@@ -1,6 +1,5 @@
 import { Movie } from "src/models/movie.model";
 
-
 export class MovieRepository {
   private movieList: Movie[];
 
@@ -8,28 +7,43 @@ export class MovieRepository {
     this.movieList = [
       {
         id: 1,
-        title: "Film 1",
-        description: "Film 1 açıklama", imageUrl: "/assets/img/1.jpeg",
+        title: "film 1",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, deleniti eum odio illo pariatur doloremque esse veniam libero inventore non natus id voluptatum consectetur magni quos? Totam corrupti placeat iste",
+        imageUrl: "/assets/img/1.jpeg",
+        isPopular: false,
+        publishDate: new Date(1990, 10, 10),
       },
       {
         id: 2,
-        title: "Film 2",
-        description: "Film 2 açıklama", imageUrl: "/assets/img/2.jpeg"
+        title: "film 2",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, deleniti eum odio illo pariatur doloremque esse veniam libero inventore non natus id voluptatum consectetur magni quos? Totam corrupti placeat iste",
+        imageUrl: "/assets/img/2.jpeg",
+        isPopular: false,
+        publishDate: new Date(1990, 10, 10),
       },
       {
         id: 3,
-        title: "Film 3",
-        description: "Film 3 açıklama", imageUrl: "/assets/img/3.jpeg"
+        title: "film 3",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, deleniti eum odio illo pariatur doloremque esse veniam libero inventore non natus id voluptatum consectetur magni quos? Totam corrupti placeat iste",
+        imageUrl: "/assets/img/3.jpeg",
+        isPopular: false,
+        publishDate: new Date(1990, 10, 10),
       },
       {
         id: 4,
-        title: "Film 4",
-        description: "Film 4 açıklama", imageUrl: "/assets/img/4.jpeg"
+        title: "film 4",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, deleniti eum odio illo pariatur doloremque esse veniam libero inventore non natus id voluptatum consectetur magni quos? Totam corrupti placeat iste",
+        imageUrl: "/assets/img/4.jpeg",
+        isPopular: true,
+        publishDate: new Date(1990, 10, 10),
       },
       {
         id: 5,
-        title: "Film 5",
-        description: "Film 5 açıklama", imageUrl: "/assets/img/5.jpeg"
+        title: "film 5",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, deleniti eum odio illo pariatur doloremque esse veniam libero inventore non natus id voluptatum consectetur magni quos? Totam corrupti placeat iste",
+        imageUrl: "/assets/img/5.jpeg",
+        isPopular: true,
+        publishDate: new Date(1990, 10, 10),
       },
     ]
   }
@@ -38,7 +52,11 @@ export class MovieRepository {
     return this.movieList;
   }
 
+  getPopularMovieList(): Movie[] {
+    return this.movieList.filter(x => x.isPopular);
+  }
+
   getMovieById(id: number): Movie | undefined {
-    return this.movieList.find(i => i.id == id);
+    return this.movieList.find(x => x.id == id);
   }
 }

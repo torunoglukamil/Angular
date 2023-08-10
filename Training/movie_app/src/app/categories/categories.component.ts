@@ -10,9 +10,15 @@ import { CategoryRepository } from 'src/repositories/category.repository';
 export class CategoriesComponent {
   private repository: CategoryRepository;
   categoryList: Category[];
+  selectedCategoryId: number | null;
 
   constructor() {
     this.repository = new CategoryRepository();
     this.categoryList = this.repository.getCategoryList();
+    this.selectedCategoryId = null;
+  }
+
+  selectCategory(categoryId: number | null) {
+    this.selectedCategoryId = categoryId;
   }
 }
