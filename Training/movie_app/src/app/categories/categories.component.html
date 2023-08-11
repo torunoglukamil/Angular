@@ -1,7 +1,7 @@
 <div class="list-group">
-    <a (click)="selectCategory(null)" [class.active]="!selectedCategoryId"
-        class="list-group-item list-group-item-action">Tüm Kategoriler</a>
-    <a *ngFor="let category of categoryList" (click)="selectCategory(category.id)"
-        [class.active]="selectedCategoryId == category.id" class="list-group-item list-group-item-action">{{
-        category.name | titlecase }}</a>
+    <a routerLink="movies" class="list-group-item list-group-item-action" (click)="selectCategory(null)"
+        [class.active]="!selectedCategoryId">Tüm Kategoriler</a>
+    <a *ngFor="let category of categoryList" routerLink="movies/category/{{ category.id }}"
+        class="list-group-item list-group-item-action" (click)="selectCategory(category.id)"
+        [class.active]="selectedCategoryId == category.id">{{ category.name | titlecase }}</a>
 </div>

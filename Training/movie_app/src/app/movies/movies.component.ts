@@ -1,34 +1,47 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Movie } from 'src/models/movie.model';
-import { MovieRepository } from 'src/repositories/movie.repository';
 import { AlertifyService } from 'src/services/alertify.service';
+import { MovieService } from 'src/services/movie.service';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  styleUrls: ['./movies.component.css'],
+  providers: [MovieService],
 })
 export class MoviesComponent {
-  private repository: MovieRepository;
   movieList: Movie[];
   filteredMovieList: Movie[];
   popularMovieList: Movie[];
   filterText: string;
+  error: any;
 
-  constructor(private alertify: AlertifyService) {
-    this.repository = new MovieRepository();
-    this.movieList = this.repository.getMovieList();
-    this.filteredMovieList = this.movieList;
-    this.popularMovieList = this.repository.getPopularMovieList();
+  constructor(private alertify: AlertifyService, private movieService: MovieService, private activatedRoute: ActivatedRoute) {
+    this.movieList = [];
+    this.filteredMovieList = [];
+    this.popularMovieList = [];
     this.filterText = "";
+    this.loadData();
   }
 
-  onFilterChange() {
+  loadData(): void {
+    this.activatedRoute.params.subscribe(param => this.movieService.getMovieList(param["categoryId"]).subscribe(
+      data => {
+        this.movieList = data;
+        this.filteredMovieList = this.movieList;
+        this.popularMovieList = this.movieList.filter(x => x.isPopular);
+      },
+      error => this.error = error,
+    ));
+  }
+
+  onFilterChange(): void {
     let filterText = this.filterText.replaceAll(" ", "").toLowerCase();
     this.filteredMovieList = this.movieList.filter(x => x.title.replaceAll(" ", "").toLowerCase().indexOf(filterText) != -1 || x.description.replaceAll(" ", "").toLowerCase().indexOf(filterText) != -1);
   }
 
-  addToList($event: any, movie: Movie) {
+  addToList($event: any, movie: Movie): void {
     if ($event.target.classList.contains('btn-primary')) {
       $event.target.innerText = "Listeden Çıkar";
       $event.target.classList.remove('btn-primary');

@@ -18,7 +18,7 @@ export class CategoriesComponent {
     this.selectedCategoryId = null;
   }
 
-  selectCategory(categoryId: number | null) {
+  selectCategory(categoryId: number | null): void {
     this.selectedCategoryId = categoryId;
   }
 }

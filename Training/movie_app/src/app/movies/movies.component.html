@@ -3,6 +3,8 @@
         placeholder="Film ara...">
 </div>
 
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
 <h2>filterText</h2>
 <div *ngIf="movieList.length > 0; else no_movie">
     <div class="card mb-3" *ngFor="let movie of movieList | movieFilter: filterText">
@@ -51,9 +53,9 @@
     <div class="alert alert-warning">Aranan isimde bir film yok.</div>
 </ng-template>
 
+<br><br>
+<h2>Popüler Filmler</h2>
 <div *ngIf="popularMovieList.length > 0; else no_popular_movie">
-    <br><br>
-    <h2>Popüler Filmler</h2>
     <div class="card mb-3" *ngFor="let movie of popularMovieList">
         <div class="row">
             <div class="col-md-3">
